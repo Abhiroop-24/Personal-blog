@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artistic Blog - Enhanced Edition</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css">
+    <meta name="description" content="A personal blog showcasing artistic hobbies and drawing projects with stunning animations.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Animated Welcome Overlay -->
+    <div class="welcome-overlay" id="welcomeOverlay">
+        <canvas id="particlesCanvas"></canvas>
+        <div class="welcome-content">
+            <h1 class="typing-text" id="typingTitle">Welcome to My Creative Space</h1>
+            <div class="glowing-line"></div>
+            <p class="typing-text-sub" id="typingSubtitle">
+                Exploring the intersection of 
+                <span class="gradient-text">Technology</span>, 
+                <span class="gradient-text">Art</span>, and 
+                <span class="gradient-text">Innovation</span>
+            </p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main id="mainContent" class="main-content">
+        <!-- Animated Header -->
+        <header class="navbar glass-effect">
+            <div class="logo pulse-animation">
+                <i class="fas fa-palette"></i>
+                <span>Portfolio</span>
+            </div>
+            <button class="mobile-menu-btn" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="#home" class="nav-link">Home</a></li>
+                    <li><a href="#projects" class="nav-link">Projects</a></li>
+                    <li><a href="#aiml" class="nav-link">AI/ML</a></li>
+                    <li><a href="#electronics" class="nav-link">Electronics</a></li>
+                    <li><a href="#gallery" class="nav-link">Gallery</a></li>
+                    <li><a href="#blog" class="nav-link">Blog</a></li>
+                    <li><a href="#about" class="nav-link">About</a></li>
+                    <li><a href="#contact" class="nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Profile Section -->
+        <section id="home" class="profile-section animate-fade-in">
+            <div class="profile-container">
+                <div class="profile-image-wrapper floating-animation">
+                    <img src="assets/profile.png" alt="Profile Picture" class="profile-picture">
+                    <div class="profile-ring"></div>
+                </div>
+                <div class="profile-info slide-up-animation">
+                    <h1 class="profile-name">Abhiroop</h1>
+                    <p class="profile-title">Technology Enthusiast & Creative Developer</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                        <a href="#" class="social-icon" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="social-icon" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-icon" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hero Section -->
+        <section class="hero-section glass-effect animate-fade-in">
+            <div class="hero-content">
+                <h2 class="hero-title">Crafting Digital Experiences</h2>
+                <p class="hero-subtitle">Where creativity meets technology to build amazing things</p>
+                <a href="#projects" class="cta-button ripple-effect">
+                    <span>Explore My Work</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+            <div class="floating-shapes">
+                <div class="shape shape-1"></div>
+                <div class="shape shape-2"></div>
+                <div class="shape shape-3"></div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section projects-section">
+            <h2 class="section-title">
+                <span class="title-text">Featured Projects</span>
+                <span class="title-underline"></span>
+            </h2>
+            <div class="cards-grid">
+                <div class="card card-hover-effect">
+                    <div class="card-image">
+                        <div class="placeholder-gradient"></div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Watercolor Landscapes</h3>
+                        <p>A collection of serene landscapes painted in watercolor.</p>
+                        <a href="#" class="card-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="card card-hover-effect">
+                    <div class="card-image">
+                        <div class="placeholder-gradient"></div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Digital Illustrations</h3>
+                        <p>Explore my digital art creations and character designs.</p>
+                        <a href="#" class="card-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="card card-hover-effect">
+                    <div class="card-image">
+                        <div class="placeholder-gradient"></div>
+                    </div>
+                    <div class="card-content">
+                        <h3>Sketchbook Pages</h3>
+                        <p>A glimpse into my sketchbook filled with doodles and ideas.</p>
+                        <a href="#" class="card-link">View Project <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- AI/ML Section -->
+        <section id="aiml" class="section aiml-section">
+            <h2 class="section-title">
+                <span class="title-text">AI & Machine Learning</span>
+                <span class="title-underline"></span>
+            </h2>
+            <div class="cards-grid">
+                <div class="card card-hover-effect">
+                    <div class="card-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Neural Networks</h3>
+                        <p>Explore the basics of neural networks, deep learning, and their applications in real-world problems.</p>
+                    </div>
+                </div>
+                <div class="card card-hover-effect">
+                    <div class="card-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Natural Language Processing</h3>
+                        <p>Learn about NLP, text classification, sentiment analysis, and chatbots using Python and ML libraries.</p>
+                    </div>
+                </div>
+                <div class="card card-hover-effect">
+                    <div class="card-icon">
+                        <i class="fas fa-eye"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Computer Vision</h3>
+                        <p>Discover how machines interpret images and videos, and build your own image classifiers and detectors.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Electronics Section -->
+        <section id="electronics" class="section electronics-section">
+            <h2 class="section-title">
+                <span class="title-text">Electronics Projects</span>
+                <span class="title-underline"></span>
+            </h2>
+            <div class="cards-grid">
+                <div class="card card-hover-effect card-with-image">
+                    <img src="assets/uno.jpg" alt="Arduino UNO" class="card-img">
+                    <div class="card-overlay">
+                        <h3>Arduino Automation</h3>
+                        <p>Build smart home projects and automation systems using Arduino and sensors.</p>
+                    </div>
+                </div>
+                <div class="card card-hover-effect card-with-image">
+                    <img src="assets/seed.jpg" alt="Seeed Studio ESP32" class="card-img">
+                    <div class="card-overlay">
+                        <h3>IoT with ESP32</h3>
+                        <p>Connect devices to the cloud and control them remotely using ESP32 and IoT platforms.</p>
+                    </div>
+                </div>
+                <div class="card card-hover-effect card-with-image clickable" onclick="window.location.href='../docs/robotics.html'">
+                    <img src="assets/bot.jpg" alt="Robotics Project" class="card-img">
+                    <div class="card-overlay">
+                        <h3>Robotics</h3>
+                        <p>Design and program simple robots, line followers, and obstacle avoiders with microcontrollers.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gallery Section -->
+        <section id="gallery" class="section gallery-section">
+            <h2 class="section-title">
+                <span class="title-text">Art Gallery</span>
+                <span class="title-underline"></span>
+            </h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="assets/pic1.jpg" alt="Cosmic Entity" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h3>Cosmic Entity</h3>
+                        <p>A haunting sketch of a cosmic horror entity featuring intricate spiral patterns.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/pic2.jpg" alt="Ethereal Portrait" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h3>Ethereal Portrait</h3>
+                        <p>A captivating portrait study showcasing delicate pencil work.</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="assets/pic3.jpg" alt="Mechanical Kings" class="gallery-img">
+                    <div class="gallery-overlay">
+                        <h3>Mechanical Kings</h3>
+                        <p>A surreal composition blending cyberpunk elements with classical sketch techniques.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="section blog-section">
+            <h2 class="section-title">
+                <span class="title-text">Latest Blog Posts</span>
+                <span class="title-underline"></span>
+            </h2>
+            <div class="cards-grid">
+                <div class="card card-hover-effect">
+                    <div class="card-content">
+                        <span class="blog-date"><i class="far fa-calendar"></i> October 1, 2023</span>
+                        <h3>Exploring Watercolors</h3>
+                        <p>A journey into the world of watercolors, sharing techniques and tips.</p>
+                        <a href="#" class="card-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="card card-hover-effect">
+                    <div class="card-content">
+                        <span class="blog-date"><i class="far fa-calendar"></i> September 15, 2023</span>
+                        <h3>Sketching Nature</h3>
+                        <p>Capturing the beauty of nature through sketches and drawings.</p>
+                        <a href="#" class="card-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="card card-hover-effect">
+                    <div class="card-content">
+                        <span class="blog-date"><i class="far fa-calendar"></i> August 30, 2023</span>
+                        <h3>Digital Art Techniques</h3>
+                        <p>An overview of digital art tools and techniques for beginners.</p>
+                        <a href="#" class="card-link">Read More <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section about-section glass-effect">
+            <h2 class="section-title">
+                <span class="title-text">About Me</span>
+                <span class="title-underline"></span>
+            </h2>
+            <div class="about-content">
+                <p>Welcome to my personal blog! I am an artist with a passion for drawing and exploring various artistic hobbies. This blog is a reflection of my journey in the world of art, where I share my projects, techniques, and inspirations.</p>
+                <p>Through my drawings, I aim to express my creativity and connect with others who share similar interests. Join me as I document my artistic endeavors and share tips and insights along the way!</p>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section contact-section">
+            <h2 class="section-title">
+                <span class="title-text">Get in Touch</span>
+                <span class="title-underline"></span>
+            </h2>
+            <form class="contact-form glass-effect" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" placeholder="Your Name (optional)" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="Your Email (optional)" class="form-input">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Your Message <span class="required">*</span></label>
+                    <textarea id="message" name="message" placeholder="Type your message here..." class="form-input" required rows="6"></textarea>
+                </div>
+                <button class="submit-btn ripple-effect" type="submit">
+                    <span>Send Message</span>
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+                <div id="formStatus" class="form-status"></div>
+            </form>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section class="section testimonials-section">
+            <h2 class="section-title">
+                <span class="title-text">Testimonials</span>
+                <span class="title-underline"></span>
+            </h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"This blog inspires me to create more art every day!"</p>
+                    <div class="testimonial-author">
+                        <strong>Alex</strong>
+                        <span>Art Enthusiast</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"Beautiful designs and amazing tutorials."</p>
+                    <div class="testimonial-author">
+                        <strong>Priya</strong>
+                        <span>Digital Artist</span>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                    <p class="testimonial-text">"A must-visit for every art lover!"</p>
+                    <div class="testimonial-author">
+                        <strong>Samir</strong>
+                        <span>Designer</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Portfolio</h3>
+                <p>Explore my creative journey through technology and art. Building innovative solutions and creating meaningful experiences.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#gallery">Gallery</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Projects</h3>
+                <ul class="footer-links">
+                    <li><a href="#electronics">Electronics</a></li>
+                    <li><a href="#aiml">AI/ML</a></li>
+                    <li><a href="#gallery">Artwork</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul class="footer-links">
+                    <li><a href="#contact">Get in Touch</a></li>
+                    <li><a href="#">Support</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Abhiroop. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="backToTop" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </button>
+
+    <script src="scripts/main.js"></script>
+</body>
+</html>
