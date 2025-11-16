@@ -1,0 +1,603 @@
+/* Base Styles */
+:root {
+    --primary-color: #00c6ff;
+    --text-color: #e0e6ed;
+    --bg-dark: rgba(15, 32, 39, 0.85);
+    --bg-darker: rgba(0, 0, 0, 0.75);
+    --border-light: rgba(255, 255, 255, 0.05);
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: #00000000;
+    background-image: url('../assets/forest-dark.jpg');
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+    color: var(--text-color);
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.6) 100%
+    );
+    z-index: 0;
+    pointer-events: none;
+}
+
+main {
+    position: relative;
+    z-index: 1;
+    padding-top: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 20px 20px;
+}
+
+/* Header Styles */
+.translucent-header {
+    background: var(--bg-dark);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    padding: 1rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Project Styles */
+.robotics-project {
+    max-width: 1100px;
+    margin: 0 auto 2rem;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.7) 0%,
+        rgba(0, 0, 0, 0.5) 100%
+    );
+    border-radius: 12px;
+    padding: 2rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+}
+
+.section-title {
+    text-align: center;
+    color: var(--primary-color);
+    margin-bottom: 2rem;
+    font-size: 2.5em;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.project-description {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Consolidated Content Box and Section Styles */
+.content-box,
+.project-description section,
+.robotics-project {
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-light);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.10);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.content-box:hover,
+.project-description section:hover,
+.robotics-project:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,198,255,0.2),
+                0 0 15px rgba(0,198,255,0.15);
+    border-color: rgba(0,198,255,0.3);
+    background: rgba(0, 0, 0, 0.65);
+}
+
+/* Clickable card styles */
+.card.clickable {
+    cursor: pointer;
+    position: relative;
+    background: rgba(0, 0, 0, 0.6);
+    transform: translateZ(0); /* Hardware acceleration */
+    will-change: transform, box-shadow; /* Optimize animations */
+    transition: all 0.25s ease-out;
+}
+
+.card.clickable::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: inherit;
+    border: 1px solid rgba(0,198,255,0);
+    transition: all 0.25s ease-out;
+}
+
+.card.clickable:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 20px rgba(0,198,255,0.15);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.card.clickable:hover::after {
+    border-color: rgba(0,198,255,0.3);
+    box-shadow: inset 0 0 20px rgba(0,198,255,0.1);
+}
+
+.card.clickable:active {
+    transform: translateY(-2px);
+    transition-duration: 0.1s;
+}
+
+/* Card image styles */
+.card .card-image {
+    width: 100%;
+    aspect-ratio: 4/3;
+    height: 180px;
+    object-fit: contain;
+    border-radius: 8px;
+    margin: 1rem auto;
+    padding: 0.5rem;
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.2) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card:hover .card-image {
+    transform: scale(1.02) translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,198,255,0.15);
+    border-color: rgba(0,198,255,0.3);
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.5) 0%,
+        rgba(0, 0, 0, 0.3) 100%
+    );
+}
+
+/* Ensure proper spacing after image */
+.card h3 {
+    margin-top: 1rem;
+}
+
+/* Code block and pre styles */
+pre {
+    background: linear-gradient(
+        170deg,
+        rgba(0, 0, 0, 0.6) 0%,
+        rgba(0, 0, 0, 0.5) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(5px);
+    backdrop-filter: blur(5px);
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+pre::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 20px;
+    height: 3px;
+    width: 40px;
+    background: var(--primary-color);
+    border-radius: 0 0 3px 3px;
+}
+
+pre[data-lang]::after {
+    content: attr(data-lang);
+    position: absolute;
+    top: -10px;
+    left: 20px;
+    background: var(--primary-color);
+    color: #000;
+    font-size: 0.7em;
+    font-weight: bold;
+    padding: 2px 8px;
+    border-radius: 3px 3px 0 0;
+    text-transform: uppercase;
+}
+
+code {
+    font-family: 'Consolas', 'Monaco', monospace;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.2em 0.4em;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+pre code {
+    background: transparent;
+    padding: 0;
+}
+
+.project-links {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+/* Button Styles */
+.btn {
+    display: inline-block;
+    padding: 0.8rem 1.5rem;
+    background: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 25px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 198, 255, 0.3);
+}
+
+/* GitHub Repo Button Styles */
+.repo-btn {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    background: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.1em;
+    margin: 2rem auto 0 auto;
+    box-shadow: 0 2px 8px rgba(0,198,255,0.10);
+    transition: box-shadow 0.3s, background 0.3s, color 0.3s;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+.repo-btn:hover, .repo-btn:focus {
+    box-shadow: 0 0 18px 4px rgba(0,198,255,0.45), 0 2px 8px rgba(0,198,255,0.10);
+    background: #00e0ff;
+    color: #222;
+    outline: none;
+}
+
+/* Footer Styles */
+.footer {
+    text-align: center;
+    padding: 2rem;
+    background: var(--bg-dark);
+    margin-top: 4rem;
+}
+
+/* Component group styles with lighter gradient */
+.component-group {
+    background: linear-gradient(
+        160deg,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.3) 100%
+    );
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    -webkit-backdrop-filter: blur(3px);
+    backdrop-filter: blur(3px);
+    transition: all 0.3s ease;
+}
+
+.component-group:hover {
+    background: rgba(0, 0, 0, 0.4);
+    border-color: rgba(0,198,255,0.2);
+    box-shadow: 0 6px 20px rgba(0,198,255,0.15),
+                0 0 10px rgba(0,198,255,0.1);
+    transform: translateY(-1px);
+}
+
+/* Center alignment utility class */
+.content-center {
+    text-align: center;
+}
+
+/* Headings */
+.content-box h2,
+.content-box h3,
+.content-box h4,
+.project-description h2,
+.project-description h3,
+.project-description h4 {
+    color: var(--primary-color);
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.content-box h2:first-child,
+.content-box h3:first-child,
+.content-box h4:first-child,
+.project-description section h2:first-child,
+.project-description section h3:first-child,
+.project-description section h4:first-child {
+    margin-top: 0;
+}
+
+/* Component and Content Organization */
+.component-group {
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    border: 1px solid var(--border-light);
+}
+
+.component-group:last-child {
+    margin-bottom: 0;
+}
+
+.component-group h3,
+.component-group h4 {
+    color: var(--primary-color);
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+/* Lists */
+.content-box ul,
+.content-box ol,
+.project-description ul,
+.project-description ol {
+    padding-left: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.content-box li,
+.project-description li {
+    margin-bottom: 0.5rem;
+}
+
+.content-box li:last-child,
+.project-description li:last-child {
+    margin-bottom: 0;
+}
+
+/* Text emphasis */
+.content-box strong,
+.project-description strong {
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* Last elements in containers */
+.content-box *:last-child,
+.project-description section *:last-child {
+    margin-bottom: 0;
+}
+
+/* Animation durations */
+[data-aos] {
+    transition-duration: 600ms;
+}
+
+[data-aos][data-aos][data-aos-duration="1200"] {
+    transition-duration: 1200ms;
+}
+
+/* Robotics Table Styles */
+.robotics-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    margin: 1rem 0;
+    background: linear-gradient(
+        160deg,
+        rgba(0, 0, 0, 0.4) 0%,
+        rgba(0, 0, 0, 0.3) 100%
+    );
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.robotics-table th,
+.robotics-table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-light);
+}
+
+.robotics-table th {
+    background: linear-gradient(
+        160deg,
+        rgba(0, 198, 255, 0.15) 0%,
+        rgba(0, 198, 255, 0.1) 100%
+    );
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* GitHub Button Styles */
+.github-btn {
+    display: inline-block;
+    padding: 0.9rem 2rem;
+    background: var(--primary-color);
+    color: #fff;
+    text-decoration: none;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1.1em;
+    margin: 2rem auto 0 auto;
+    box-shadow: 0 0 15px rgba(66, 184, 131, 0);
+    transition: all 0.3s ease;
+    text-align: center;
+    border: none;
+    cursor: pointer;
+}
+.github-btn:hover {
+    box-shadow: 0 0 20px rgba(66, 184, 131, 0.5);
+    transform: translateY(-2px);
+    background: linear-gradient(135deg, rgba(66, 184, 131, 1), rgba(66, 184, 131, 0.8));
+}
+
+/* Modal Styles with Smooth Transitions */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s ease-out;
+}
+
+.modal-overlay.active {
+    opacity: 1;
+    visibility: visible;
+    background: rgba(0, 0, 0, 0.85);
+}
+
+.modal-content {
+    background: linear-gradient(
+        135deg,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.7) 100%
+    );
+    padding: 1rem;
+    border-radius: 12px;
+    max-width: 80%;
+    max-height: 80vh;
+    border: 1px solid var(--border-light);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    transform: translateY(20px);
+    opacity: 0;
+    transition: all 0.3s ease-out;
+    will-change: transform, opacity;
+}
+
+.modal-overlay.active .modal-content {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.modal-image {
+    max-width: 100%;
+    max-height: calc(80vh - 2rem);
+    border-radius: 8px;
+    display: block;
+    object-fit: contain;
+    margin: 0 auto;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.3s ease-out;
+    will-change: transform, opacity;
+}
+
+.modal-overlay.active .modal-image {
+    opacity: 1;
+    transform: scale(1);
+    transition-delay: 0.1s;
+}
+
+.view-image-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: linear-gradient(135deg, rgba(0,198,255,0.2), rgba(0,198,255,0.1));
+    color: var(--text-color);
+    border: 1px solid rgba(0,198,255,0.2);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 1rem;
+}
+
+.view-image-btn:hover {
+    background: linear-gradient(135deg, rgba(0,198,255,0.3), rgba(0,198,255,0.2));
+    border-color: rgba(0,198,255,0.4);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0,198,255,0.2);
+}
+
+/* Electronics Section Image Styles */
+.electronics-image-container {
+    width: 200px;
+    height: 150px;
+    margin: 1.5rem auto;
+    padding: 1rem;
+    background: linear-gradient(135deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.1) 100%);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.3s ease-out;
+}
+
+.electronics-image {
+    max-width: 100%;
+    max-height: 100%;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+    border-radius: 4px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+    transition: all 0.3s ease-out;
+    transform-origin: center center;
+}
+
+.card:hover .electronics-image-container {
+    border-color: rgba(0,198,255,0.3);
+    box-shadow: 0 4px 15px rgba(0,198,255,0.15);
+    background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.2) 100%);
+}
+
+.card:hover .electronics-image {
+    transform: scale(1.08) translateY(-2px);
+    filter: drop-shadow(0 4px 8px rgba(0,198,255,0.2));
+}

@@ -1,0 +1,21 @@
+{
+  "name": "personal-blog",
+  "version": "1.0.0",
+  "description": "A personal blog showcasing artistic hobbies and drawing projects.",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server public",
+    "build": "echo 'No build step required for static site'"
+  },
+  "keywords": [
+    "blog",
+    "art",
+    "hobbies",
+    "drawing"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.1"
+  }
+}

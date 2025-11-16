@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automatic Pothole Fixing Robot | Electronics Project</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">    <link rel="stylesheet" href="styles/main.css">
+    <script defer src="scripts/animations.js"></script>
+    <meta name="description" content="Detailed explanation of the Automatic Pothole Fixing Robot project.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+</head>
+<body>
+    <header class="translucent-header">
+        <button class="nav-toggle" aria-label="Toggle navigation">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#electronics">Electronics</a></li>
+                <li><a href="index.html#feedback">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>    <main>
+        <section class="robotics-project" data-aos="fade-up" data-aos-duration="1200">
+            <h1 class="section-title" data-aos="fade-down" data-aos-delay="200">🤖 Pothole-Fixing Robot</h1>
+            <div class="project-description" data-aos="fade-up" data-aos-delay="400">
+                <section class="card">
+                    <h2>Project Overview</h2>
+                    <p>An autonomous robot that detects road potholes using IR and ultrasonic sensors, aligns itself, and dumps sand using a servo. The robot also features live video streaming using a Raspberry Pi 3 B+ with 5MP Camera.</p>
+                    <button class="view-image-btn" onclick="showModal()">View Setup Image</button>
+                </section>                <section class="content-box">
+                    <h2>📸 System Overview</h2>
+                    <ul>
+                        <li>Detects potholes using IR sensor layout</li>
+                        <li>Measures pothole depth using ultrasonic sensor</li>
+                        <li>Aligns itself precisely using 4-motor differential control</li>
+                        <li>Dumps sand via a servo gate</li>
+                        <li>Streams live video using Raspberry Pi 3 B+</li>
+                    </ul>
+                </section>
+                <section class="content-box">
+                    <h2>🔧 Hardware Used</h2>
+                    <div class="component-group">
+                        <h3>🤖 Arduino-Based Robot:</h3>
+                        <ul>
+                            <li>Arduino Uno + L293D Motor Driver Shield (pluggable)</li>
+                            <li>4× DC Motors (M1–M4)</li>
+                            <li>4× IR Sensors (for alignment)</li>
+                            <li>1× Ultrasonic Sensor (HC-SR04 for depth)</li>
+                            <li>1× Servo Motor (for sand gate)</li>
+                            <li>Power supply/battery</li>
+                        </ul>
+                    </div>
+                    <div class="component-group">
+                        <h3>📷 Raspberry Pi for Live Streaming:</h3>
+                        <ul>
+                            <li>Raspberry Pi 3 B+</li>
+                            <li>5MP Pi Camera Module</li>
+                            <li>Wi-Fi/Ethernet for video stream</li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="content-box">
+                    <h2>📐 Pin Mapping & Circuit Connections</h2>
+                    <div class="component-group">
+                        <h3>Sensor Pins:</h3>
+                        <table class="robotics-table">
+                            <tr><th>Sensor</th><th>Pin</th></tr>
+                            <tr><td>IR_LEFT</td><td>A0</td></tr>
+                            <tr><td>IR_CENTER_LEFT</td><td>A1</td></tr>
+                            <tr><td>IR_CENTER_RIGHT</td><td>A2</td></tr>
+                            <tr><td>IR_RIGHT</td><td>A3</td></tr>
+                            <tr><td>Ultrasonic TRIG</td><td>A4</td></tr>
+                            <tr><td>Ultrasonic ECHO</td><td>A5</td></tr>
+                        </table>
+                    </div>
+                    <div class="component-group">
+                        <h3>Motors (L293D Shield):</h3>
+                        <ul>
+                            <li>M1 → IN1 & IN2</li>
+                            <li>M2 → IN3 & IN4</li>
+                            <li>M3 → IN5 & IN6</li>
+                            <li>M4 → IN7 & IN8</li>
+                            <li>ENA → PWM for M1 & M2</li>
+                            <li>ENB → PWM for M3 & M4</li>
+                        </ul>
+                    </div>
+                    <div class="component-group">
+                        <h3>Servo:</h3>
+                        <ul>
+                            <li>Connected to Pin 10 on the L293D shield (servo port)</li>
+                        </ul>
+                    </div>
+                </section>
+                <section class="content-box">
+                    <h2>⚙️ Features</h2>
+                    <ul>
+                        <li>Detects potholes using IR sensor layout</li>
+                        <li>Measures pothole depth using ultrasonic sensor</li>
+                        <li>Aligns itself precisely using 4-motor differential control</li>
+                        <li>Dumps sand via a servo gate</li>
+                        <li>Streams live video using Raspberry Pi 3 B+</li>
+                    </ul>                </section>
+                <section class="code-section">
+                    <h2 class="section-title">🧠 Arduino Code Breakdown</h2>
+                    <h3>Core Functions (from <code>4x_L293D.ino</code>):</h3>
+                    <pre data-lang="C++"><code>#include &lt;Servo.h&gt;
+
+Servo sandGate;
+
+void setup() {
+  sandGate.attach(10); // Servo on pin 10
+  // ...other setup code...
+}
+
+void loop() {
+  // Example: Dump sand
+  dumpSand();
+  delay(2000);
+}
+
+void dumpSand() {
+  sandGate.write(90); // Open gate
+  delay(1000);
+  sandGate.write(0);  // Close gate
+}
+// ...rest of Arduino code...
+</code></pre>
+                    <h3>Motor Control Functions (from <code>Upper_sensors.ino</code>):</h3>
+                    <ul>
+                        <li><code>moveForward();</code>  // All 4 motors move forward</li>
+                        <li><code>moveBackward();</code> // All 4 motors move backward</li>
+                        <li><code>turnLeft();</code>     // Left motors backward, right motors forward</li>
+                        <li><code>turnRight();</code>    // Left motors forward, right motors backward</li>
+                        <li><code>stopMoving();</code>   // All motors stopped</li>
+                        <li><code>dumpSand();</code>     // Activates servo to dump sand</li>
+                    </ul>
+                </section>
+                <section class="content-box">
+                    <h2>📺 Raspberry Pi Live Stream Setup (Step-by-step)</h2>
+                    <ol>
+                        <li>Enable Camera on Raspberry Pi:
+                            <pre data-lang="bash"><code>sudo raspi-config
+# Navigate to Interface Options → Camera → Enable
+sudo reboot</code></pre>
+                        </li>
+                        <li>Create the Streaming Script:
+                            <pre data-lang="bash"><code>nano ~/start_stream.sh
+# Paste the following code:
+#!/bin/bash
+WIDTH=800
+HEIGHT=600
+FPS=12
+PORT=8080
+
+libcamera-vid -t 0 \
+  --width $WIDTH --height $HEIGHT \
+  --framerate $FPS \
+  --inline \
+  --codec h264 \
+  -o - | \
+ffmpeg -i - \
+  -c:v copy \
+  -f mpegts \
+  udp://0.0.0.0:$PORT?pkt_size=1316
+</code></pre>
+                        </li>
+                        <li>Make the script executable:
+                            <pre data-lang="bash"><code>chmod +x ~/start_stream.sh</code></pre>
+                        </li>
+                        <li>Run the Stream (for testing):
+                            <pre data-lang="bash"><code>./start_stream.sh</code></pre>
+                        </li>
+                        <li>Autostart on Boot (optional):
+                            <pre data-lang="bash"><code>crontab -e
+# Add the following line at the end:
+@reboot /home/pi/start_stream.sh</code></pre>
+                        </li>
+                        <li>View the Stream:
+                            <pre data-lang="bash"><code># On a client in the same network, open VLC and go to:
+Media → Open Network Stream → udp://&lt;RPI_IP&gt;:8080
+# Replace &lt;RPI_IP&gt; with your Pi's IP address</code></pre>
+                        </li>
+                    </ol>
+                </section>
+                <section class="content-box">
+                    <h2>📂 Project Files</h2>
+                    <ul>
+                        <li><code>Upper_sensors.ino</code> – Arduino logic for only sensor-based detection</li>
+                        <li><code>4x_L293D.ino</code> – Arduino logic for sensor-based detection and motor control</li>
+                        <li><code>start_stream.sh</code> – Raspberry Pi script for video streaming</li>
+                        <li><code>README.md</code> – Full documentation and setup instructions</li>
+                    </ul>
+                </section>
+                <section class="content-box">
+                    <h2>🪛 License</h2>
+                    <p>This project is licensed under the MIT License — free to use, modify, and distribute with attribution.</p>
+                </section>
+                <section class="content-box">
+                    <h2>🙋‍♂️ Author</h2>
+                    <p>Created by <strong>ABHIROOP</strong>. Feel free to fork, star ⭐ and contribute!</p>
+                </section>
+                <section class="content-box content-center">
+                    <a class="repo-btn" href="https://github.com/Abhiroop-24/Automatic-Pothole-fixing-bot" target="_blank" rel="noopener noreferrer">
+                        View Full Project on GitHub <i class="fab fa-github"></i>
+                    </a>
+                </section>
+            </div>
+        </article>
+    </main>
+    <footer class="footer">
+        <p>&copy; 2025 Artistic Blog. All rights reserved.</p>
+    </footer>
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal-overlay" onclick="hideModal(event)">
+        <div class="modal-content">
+            <img src="assets/dis.jpg" alt="Project Setup" class="modal-image">
+        </div>
+    </div>
+    <script>
+        AOS.init({
+            duration: 1000,
+            offset: 100,
+            delay: 100,
+            once: false, // Animations trigger every time
+            mirror: true, // Animations trigger on scroll up and down
+            easing: 'ease-out-cubic',
+            anchorPlacement: 'top-bottom',
+            disable: 'phone' // Remove this line if you want animations on mobile too
+        });
+    </script>
+    <script>
+        function showModal() {
+            const modal = document.getElementById('imageModal');
+            modal.classList.add('active');
+        }
+
+        function hideModal(event) {
+            if (event.target.classList.contains('modal-overlay')) {
+                const modal = document.getElementById('imageModal');
+                modal.classList.remove('active');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artistic Blog</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../src/styles/main.css">
+    <script defer src="../src/scripts/animations.js"></script>
+    <meta name="description" content="A personal blog showcasing artistic hobbies and drawing projects.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Start fade effect after typing completes
+            setTimeout(() => {
+                const welcomeScreen = document.querySelector('.welcome-screen');
+                if (welcomeScreen) {
+                    welcomeScreen.style.background = 'rgba(0, 0, 0, 0)';
+                    welcomeScreen.style.opacity = '0';
+                    // Remove from DOM after transition completes
+                    setTimeout(() => welcomeScreen.remove(), 2000);
+                }
+            }, 4000); // Wait for typing animations to complete
+
+            // Mobile menu functionality
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            const navLinks = document.querySelector('.nav-links');
+            
+            if (menuBtn && navLinks) {
+                menuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                    const isOpen = navLinks.classList.contains('active');
+                    menuBtn.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+                });
+
+                // Close menu when clicking a link
+                navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navLinks.classList.remove('active');
+                        menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    });
+                });
+
+                // Close menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!navLinks.contains(e.target) && !menuBtn.contains(e.target) && navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                    }
+                });
+            }
+        });
+    </script>
+    <style>
+        /* Adding blur effects for a modern look */
+        .navbar {
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+
+        .hero-overlay {
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+        }
+
+        .card {
+            -webkit-backdrop-filter: blur(8px);
+            backdrop-filter: blur(8px);
+        }
+
+        /* Smooth transitions for AOS animations */
+        [data-aos] {
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Remove default animations since we're using AOS */
+        .hero-content h1,
+        .hero-content p,
+        .btn,
+        .card,
+        .section-title {
+            animation: none;
+        }
+
+        /* Remove this block to allow forest-dark.jpg to show */
+        /* body {
+            background: linear-gradient(135deg, #0f2027 0%, #2c5364 100%);
+        } */
+
+        /* Adding blur effects for a modern look */
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; visibility: hidden; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Welcome overlay styles */
+        .welcome-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 1;
+            transition: opacity 1.2s ease;
+        }
+
+        .welcome-content {
+            text-align: center;
+            color: white;
+        }
+
+        .typing-animation {
+            display: inline-block;
+            overflow: hidden;
+            white-space: nowrap;
+            animation: typing 4s steps(30, end), blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: rgba(255, 255, 255, 0.75); }
+        }
+
+        /* Fade out effect for welcome overlay */
+        .fade-out {
+            opacity: 0;
+            transition: opacity 1.2s ease;
+        }
+
+        /* Main content visible class */
+        .visible {
+            opacity: 1;
+            transition: opacity 1.2s ease;
+        }
+
+        /* Profile section styles */
+        .profile-section {
+            text-align: center;
+            padding: 60px 20px;
+            /* background: #f9f9f9; */
+        }
+
+        .profile-picture {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+        }
+
+        .profile-name {
+            font-size: 28px;
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .profile-title {
+            font-size: 18px;
+            color: #00e4d8;
+            margin: 5px 0 0;
+        }
+
+        /* Welcome hero section styles */
+        .welcome-hero {
+            padding: 80px 20px;
+            text-align: center;
+            /* background: #fff; */
+        }
+
+        .welcome-hero-inner {
+            position: relative;
+            display: inline-block;
+            padding: 20px;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .welcome-accent {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300%;
+            height: 300%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            transform: translate(-50%, -50%) scale(0);
+            animation: accent-animation 6s ease-out infinite;
+        }
+
+        
+
+        .explore-btn {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 24px;
+            font-size: 16px;
+            font-weight: 500;
+            color: #fff;
+            background: #0099ff;
+            border: none;
+            border-radius: 4px;
+            text-decoration: none;
+            transition: background 0.3s ease;
+        }
+
+        .explore-btn:hover {
+            background: #00aeda;
+        }
+
+        .big-btn {
+            padding: 16px 32px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 6px;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .big-btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 6px;
+            z-index: -1;
+            transition: transform 0.3s ease;
+        }
+
+        .big-btn:hover:before {
+            transform: scale(1.1);
+        }
+
+        /* Section title styles */
+        .section-title {
+            position: relative;
+            display: inline-block;
+            font-size: 28px;
+            font-weight: 600;
+            margin: 40px 0 20px;
+            padding-bottom: 10px;
+        }
+
+        .section-title:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: 0;
+            left: 0;
+            background: linear-gradient(to right, transparent, #007bff, transparent);
+        }
+
+        /* Testimonial styles */
+        .testimonials {
+            background: #f9f9f9;
+            padding: 60px 20px;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+        }
+
+        /* Newsletter form styles */
+        .newsletter-form {
+            background: #fff;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .newsletter-input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+
+        .btn {
+            background: #d32828;
+            color: white;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #005bbb;
+        }
+
+        /* Footer styles */
+        .footer-section {
+            background: #111;
+            color: #fff;
+            padding: 40px 20px;
+            font-size: 14px;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .footer-column {
+            flex: 1;
+            min-width: 220px;
+            margin-right: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .footer-column h3:after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background: linear-gradient(to right, transparent, #007bff, transparent);
+        }
+
+        .footer-links {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-links li {
+            margin: 8px 0;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .social-links {
+            margin-top: 10px;
+        }
+
+        .social-link {
+            color: #bbb;
+            margin-right: 15px;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        .social-link:hover {
+            color: #007bff;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            border-top: 1px solid #222;
+            padding-top: 20px;
+        }
+
+        /* Responsive styles */
+        @media (max-width: 768px) {
+            .welcome-hero {
+                padding: 60px 20px;
+            }
+
+            .profile-section {
+                padding: 40px 20px;
+            }
+
+            .section-title {
+                font-size: 24px;
+            }
+
+            .explore-btn {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+
+            .big-btn {
+                padding: 14px 28px;
+                font-size: 16px;
+            }
+
+            .footer-content {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .footer-column {
+                margin-right: 0;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar translucent-header">
+        <button class="mobile-menu-btn" aria-label="Toggle menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#aiml">AI/ML</a></li>
+                <li><a href="#electronics">Electronics</a></li>
+                <li><a href="#cs">CS</a></li>
+                <li><a href="#gallery">Gallery</a></li>
+                <li><a href="#blog">Blog</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="welcome-overlay" id="welcomeOverlay">
+        <canvas id="welcomeParticles"></canvas>
+        <div class="welcome-content">
+            <h1 class="welcome-title">Welcome to My Creative Space</h1>
+            <div class="welcome-underline"></div>
+            <p class="welcome-subtitle">Exploring the intersection of <span class="highlight">Technology</span>, <span class="highlight">Art</span>, and <span class="highlight">Innovation</span></p>
+        </div>
+    </div>
+
+    <main id="mainContent">
+        <header class="profile-section" data-aos="fade-down" data-aos-duration="800">
+            <img src="../src/assets/profile.png" alt="Profile Picture" class="profile-picture">
+            <div class="profile-info">
+                <h2 class="profile-name">Abhiroop</h2>
+                <p class="profile-title">Technology Enthusiast & Creative Developer</p>
+            </div>
+        </header>
+
+        <section class="welcome-hero" data-aos="fade-up" data-aos-duration="1000">
+            <div class="welcome-hero-inner">
+                <h1 class="welcome-title">Welcome to My Creative Space</h1>
+                <div class="welcome-accent"></div>
+                <p class="welcome-subtitle animated-subtitle">Exploring the intersection of <span class="highlight">Technology</span>, <span class="highlight">Art</span>, and <span class="highlight">Innovation</span></p>
+                <a href="#projects" class="explore-btn big-btn" data-aos="zoom-in" data-aos-delay="300">
+                    <span>Explore My Work</span>
+                    <i class="fas fa-arrow-circle-right"></i>
+                </a>
+            </div>
+        </section>
+
+        <section id="projects" class="projects" data-aos="fade-up" data-aos-duration="1200" data-aos-mirror="true">
+            <h2 class="section-title" data-aos="fade-down" data-aos-delay="200" data-aos-mirror="true">Featured Projects</h2>
+            <div class="card-container">
+                <div class="card" data-aos="zoom-in-up" data-aos-delay="400" data-aos-mirror="true">
+                    <div class="card-image placeholder"></div>
+                    <h3>Watercolor Landscapes</h3>
+                    <p>A collection of serene landscapes painted in watercolor.</p>
+                </div>
+                <div class="card" data-aos="zoom-in-up" data-aos-delay="600" data-aos-mirror="true">
+                    <div class="card-image placeholder"></div>
+                    <h3>Digital Illustrations</h3>
+                    <p>Explore my digital art creations and character designs.</p>
+                </div>
+                <div class="card" data-aos="zoom-in-up" data-aos-delay="800" data-aos-mirror="true">
+                    <div class="card-image placeholder"></div>
+                    <h3>Sketchbook Pages</h3>
+                    <p>A glimpse into my sketchbook filled with doodles and ideas.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="aiml" class="aiml" data-aos="fade-up" data-aos-duration="1200" data-aos-mirror="true">
+            <h2 class="section-title" data-aos="fade-down" data-aos-delay="200" data-aos-mirror="true">AI & Machine Learning</h2>
+            <div class="card-container">
+                <div class="card" data-aos="zoom-in-up" data-aos-delay="400" data-aos-mirror="true">
+                    <h3>Neural Networks</h3>
+                    <p>Explore the basics of neural networks, deep learning, and their applications in real-world problems.</p>
+                </div>
+                <div class="card" data-aos="zoom-in-up" data-aos-delay="600" data-aos-mirror="true">
+                    <h3>Natural Language Processing</h3>
+                    <p>Learn about NLP, text classification, sentiment analysis, and chatbots using Python and ML libraries.</p>
+                </div>
+                <div class="card" data-aos="zoom-in-up" data-aos-delay="800" data-aos-mirror="true">
+                    <h3>Computer Vision</h3>
+                    <p>Discover how machines interpret images and videos, and build your own image classifiers and detectors.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="electronics" class="section" data-aos="fade-up" data-aos-duration="1200" data-aos-mirror="true">
+            <h2 class="section-title" data-aos="fade-down" data-aos-delay="200" data-aos-mirror="true">Electronics Projects</h2>
+            <div class="projects-grid" data-aos="fade-up" data-aos-delay="400" data-aos-mirror="true">
+                <div class="card" data-aos="zoom-in-up" data-aos-delay="400">
+                    <img src="../src/assets/uno.jpg" alt="Arduino UNO" class="gallery-img">
+                    <h3>Arduino Automation</h3>
+                    <p>Build smart home projects and automation systems using Arduino and sensors.</p>
+                </div>
+                <div class="card" data-aos="zoom-in-up" data-aos-delay="600">
+                    <img src="../src/assets/seed.jpg" alt="Seeed Studio ESP32" class="gallery-img">
+                    <h3>IoT with ESP32</h3>
+                    <p>Connect devices to the cloud and control them remotely using ESP32 and IoT platforms.</p>
+                </div>
+                <div class="card clickable" data-aos="zoom-in-up" data-aos-delay="800" onclick="window.location.href='robotics.html'">
+                    <img src="../src/assets/bot.jpg" alt="Robotics Project" class="gallery-img">
+                    <h3>Robotics</h3>
+                    <p>Design and program simple robots, line followers, and obstacle avoiders with microcontrollers.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="section" data-aos="fade-up" data-aos-duration="1200" data-aos-mirror="true">
+            <h2 class="section-title" data-aos="fade-down" data-aos-delay="200" data-aos-mirror="true">Art Gallery</h2>
+            <div class="art-gallery" data-aos="fade-up" data-aos-delay="400" data-aos-mirror="true">
+                <div class="card" data-aos="zoom-in-up" data-aos-delay="400">
+                    <img src="../src/assets/pic1.jpg" alt="Cosmic Entity" class="gallery-img">
+                    <h3>Cosmic Entity</h3>
+                    <p>A haunting sketch of a cosmic horror entity featuring intricate spiral patterns and textured details.</p>
+                </div>
+                <div class="card" data-aos="zoom-in-up" data-aos-delay="600">
+                    <img src="../src/assets/pic2.jpg" alt="Ethereal Portrait" class="gallery-img">
+                    <h3>Ethereal Portrait</h3>
+                    <p>A captivating portrait study showcasing delicate pencil work.</p>
+                </div>
+                <div class="card" data-aos="zoom-in-up" data-aos-delay="800">
+                    <img src="../src/assets/pic3.jpg" alt="Mechanical Kings" class="gallery-img">
+                    <h3>Mechanical Kings</h3>
+                    <p>A surreal composition blending cyberpunk elements with classical sketch techniques.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="cs" class="cs" data-aos="fade-up" data-aos-duration="1200">
+
+        <section id="blog" class="blog" data-aos="fade-up" data-aos-duration="1200">
+            <h2 class="section-title" data-aos="fade-down" data-aos-delay="200">Latest Blog Posts</h2>
+            <div class="card-container">
+                <div class="card" data-aos="zoom-in-up" data-aos-delay="400">
+                    <h3>Exploring Watercolors</h3>
+                    <p><em>2023-10-01</em></p>
+                    <p>A journey into the world of watercolors, sharing techniques and tips.</p>
+                </div>
+                <div class="card" data-aos="zoom-in-up" data-aos-delay="600">
+                    <h3>Sketching Nature</h3>
+                    <p><em>2023-09-15</em></p>
+                    <p>Capturing the beauty of nature through sketches and drawings.</p>
+                </div>
+                <div class="card" data-aos="zoom-in-up" data-aos-delay="800">
+                    <h3>Digital Art Techniques</h3>
+                    <p><em>2023-08-30</em></p>
+                    <p>An overview of digital art tools and techniques for beginners.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about" data-aos="fade-up" data-aos-duration="1200">
+            <h2 class="section-title" data-aos="fade-down" data-aos-delay="200">About Me</h2>
+            <div class="about-content">
+                <p data-aos="fade-up" data-aos-delay="400">Welcome to my personal blog! I am an artist with a passion for drawing and exploring various artistic hobbies. This blog is a reflection of my journey in the world of art, where I share my projects, techniques, and inspirations.</p>
+                <p data-aos="fade-up" data-aos-delay="600">Through my drawings, I aim to express my creativity and connect with others who share similar interests. Join me as I document my artistic endeavors and share tips and insights along the way!</p>
+            </div>
+        </section>
+
+        <section id="feedback" class="section contact-section" data-aos="fade-up" data-aos-duration="1200" data-aos-mirror="true">
+            <h2 class="section-title" data-aos="fade-right" data-aos-delay="200" data-aos-mirror="true">Get in Touch</h2>
+            <div class="contact-content" data-aos="fade-up" data-aos-delay="400" data-aos-mirror="true">
+                <form class="newsletter-form" id="feedbackForm" data-aos="zoom-in" data-aos-delay="400" autocomplete="off">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="feedbackName">Name</label>
+                            <input type="text" id="feedbackName" name="name" placeholder="Your Name (optional)" class="newsletter-input">
+                        </div>
+                        <div class="form-group">
+                            <label for="feedbackEmail">Email</label>
+                            <input type="email" id="feedbackEmail" name="email" placeholder="Your Email (optional)" class="newsletter-input">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="feedbackMessage">Your Feedback or Doubt <span class="required-field">*</span></label>
+                        <textarea id="feedbackMessage" name="message" placeholder="Type your feedback or doubt here..." class="newsletter-input" required></textarea>
+                    </div>
+                    <button class="btn" type="submit">Submit</button>
+                    <div id="feedbackStatus" aria-live="polite"></div>
+                </form>
+                <script>
+                document.getElementById('feedbackForm').addEventListener('submit', async function(e) {
+                    e.preventDefault();
+                    const name = this.name.value;
+                    const email = this.email.value;
+                    const message = this.message.value;
+                    const statusDiv = document.getElementById('feedbackStatus');
+                    statusDiv.textContent = 'Submitting...';
+                    try {
+                        const res = await fetch('/.netlify/functions/feedback', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ name, email, message })
+                        });
+                        const text = await res.text();
+                        statusDiv.textContent = res.ok ? 'Thank you for your feedback!' : text;
+                        if(res.ok) this.reset();
+                    } catch (err) {
+                        statusDiv.textContent = 'Failed to submit. Please try again later.';
+                    }
+                });
+                </script>
+            </div>
+        </section>
+
+        <section id="testimonials" class="testimonials">
+            <h2 class="section-title" data-animate="slide-up">Testimonials</h2>
+            <div class="card-container">
+                <div class="card" data-animate="fade-in">
+                    <p>“This blog inspires me to create more art every day!”</p>
+                    <strong>- Alex</strong>
+                </div>
+                <div class="card" data-animate="fade-in">
+                    <p>“Beautiful designs and amazing tutorials.”</p>
+                    <strong>- Priya</strong>
+                </div>
+                <div class="card" data-animate="fade-in">
+                    <p>“A must-visit for every art lover!”</p>
+                    <strong>- Samir</strong>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-section">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>Portfolio</h3>
+                <p>Explore my creative journey through technology and art. Building innovative solutions and creating meaningful experiences.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>About</h3>
+                <ul class="footer-links">
+                    <li><a href="#about">About Me</a></li>
+                    <li><a href="#projects">Projects</a></li>
+                    <li><a href="#blog">Blog</a></li>
+                    <li><a href="#gallery">Art Gallery</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Projects</h3>
+                <ul class="footer-links">
+                    <li><a href="#electronics">Electronics</a></li>
+                    <li><a href="#robotics">Robotics</a></li>
+                    <li><a href="#software">Software</a></li>
+                    <li><a href="#art">Artwork</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column">
+                <h3>Contact</h3>
+                <ul class="footer-links">
+                    <li><a href="#contact">Get in Touch</a></li>
+                    <li><a href="#support">Support</a></li>
+                    <li><a href="#faq">FAQ</a></li>
+                    <li><a href="#privacy">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Abhiroop. All rights reserved.</p>
+        </div>
+        <button id="backToTop" class="back-to-top" title="Back to top">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </footer>
+
+    <script>
+        // Back to top button functionality
+        const backToTopButton = document.getElementById('backToTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.style.opacity = '1';
+                backToTopButton.style.visibility = 'visible';
+            } else {
+                backToTopButton.style.opacity = '0';
+                backToTopButton.style.visibility = 'hidden';
+            }
+        });
+
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+    <script>
+    window.addEventListener('DOMContentLoaded', function() {
+        // Initialize AOS with updated settings
+        AOS.init({
+            duration: 1000,
+            offset: 100,
+            delay: 100,
+            once: true,
+            mirror: false,
+            easing: 'ease-out-cubic',
+            disable: 'phone' // Disable on mobile for better performance
+        });
+
+        // Handle welcome box
+        const welcomeBox = document.querySelector('.welcome-box');
+        if (welcomeBox) {
+            setTimeout(function() {
+                welcomeBox.classList.add('hidden');
+                // Remove from DOM after animation
+                setTimeout(() => welcomeBox.remove(), 1000);
+            }, 3500); // Show welcome message for 3.5 seconds
+        }
+
+        // Disable animations on welcome box
+        document.querySelectorAll('.welcome-box *').forEach(element => {
+            element.setAttribute('data-aos-disable', 'true');
+        });
+
+        // Fade in main content
+        const mainContent = document.getElementById('mainContent');
+        if (mainContent) {
+            mainContent.style.opacity = '1';
+        }
+
+        // Hide welcome overlay after typing animation
+        const welcomeOverlay = document.getElementById('welcomeOverlay');
+        if (welcomeOverlay) {
+            setTimeout(() => {
+                welcomeOverlay.style.opacity = '0';
+                setTimeout(() => welcomeOverlay.remove(), 1200);
+            }, 5000); // Match this duration with the typing animation duration
+        }
+
+        // Sequential typing and smooth fade out
+        const overlay = document.getElementById('welcomeOverlay');
+        const main = document.getElementById('mainContent');
+        const subtitle = document.getElementById('typingSubtitle');
+        // Reveal subtitle after title typing
+        setTimeout(() => {
+            if (subtitle) subtitle.style.opacity = 1;
+        }, 2300);
+        // Fade out overlay and show main after both lines
+        setTimeout(() => {
+            if (overlay && main) {
+                overlay.classList.add('fade-out');
+                setTimeout(() => {
+                    overlay.remove();
+                    main.classList.add('visible');
+                }, 1000);
+            }
+        }, 6000); // Wait for both typing animations to complete (2.5s + 2.7s + buffer)
+    });
+
+        // Handle smooth typing and fade transitions
+        window.addEventListener('DOMContentLoaded', function() {
+            const overlay = document.getElementById('welcomeOverlay');
+            const main = document.getElementById('mainContent');
+            
+            // Start transition after typing animations complete
+            setTimeout(() => {
+                if (overlay && main) {
+                    // Fade out overlay immediately after typing
+                    overlay.classList.add('fade-out');
+                    main.classList.add('visible');
+                    
+                    // Remove overlay after fade completes
+                    setTimeout(() => {
+                        overlay.remove();
+                    }, 1000);
+                }
+            }, 5200); // Adjust timing to match typing duration exactly
+        });
+    </script>
+    <script>
+        // Modern fade out for welcome overlay
+        window.addEventListener('DOMContentLoaded', function() {
+            const overlay = document.getElementById('welcomeOverlay');
+            const main = document.getElementById('mainContent');
+            setTimeout(() => {
+                if (overlay && main) {
+                    overlay.style.opacity = '0';
+                    main.classList.add('visible');
+                    setTimeout(() => overlay.remove(), 1300);
+                }
+            }, 2600); // Wait for text and accent animations
+        });
+    </script>
+    <script>
+    // Animated floating particles for welcome overlay
+    window.addEventListener('DOMContentLoaded', function() {
+        const canvas = document.getElementById('welcomeParticles');
+        if (canvas) {
+            const ctx = canvas.getContext('2d');
+            let w = window.innerWidth, h = window.innerHeight;
+            canvas.width = w; canvas.height = h;
+            let particles = Array.from({length: 32}, () => ({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                r: 1.5 + Math.random() * 2.5,
+                dx: (Math.random() - 0.5) * 0.4,
+                dy: (Math.random() - 0.5) * 0.4,
+                c: `hsla(${Math.floor(Math.random()*60)+180}, 90%, 60%, 0.7)`
+            }));
+            function draw() {
+                ctx.clearRect(0,0,w,h);
+                for (const p of particles) {
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, 2*Math.PI);
+                    ctx.fillStyle = p.c;
+                    ctx.shadowColor = p.c;
+                    ctx.shadowBlur = 12;
+                    ctx.fill();
+                }
+            }
+            function update() {
+                for (const p of particles) {
+                    p.x += p.dx; p.y += p.dy;
+                    if (p.x < 0 || p.x > w) p.dx *= -1;
+                    if (p.y < 0 || p.y > h) p.dy *= -1;
+                }
+            }
+            function animate() {
+                draw(); update(); requestAnimationFrame(animate);
+            }
+            animate();
+            window.addEventListener('resize', () => {
+                w = window.innerWidth; h = window.innerHeight;
+                canvas.width = w; canvas.height = h;
+            });
+        }
+    });
+    </script>
+</body>
+</html>
